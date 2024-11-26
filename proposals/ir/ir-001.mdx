@@ -1,0 +1,80 @@
+---
+title: IR-001 - Smart Contract Implementation Guide
+status: Active
+author: Jane Smith
+created: 2024-01-10
+summary: Technical specification for implementing smart contracts
+---
+
+# Implementation Request: Smart Contract Guide
+
+## Overview
+
+This IR provides detailed technical specifications for implementing smart contracts in the protocol.
+
+## Technical Specification
+
+### Contract Structure
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
+contract ProtocolContract is ReentrancyGuard {
+    // State variables
+    address public admin;
+    mapping(address => uint256) public balances;
+    
+    // Events
+    event Deposit(address indexed user, uint256 amount);
+    
+    // Constructor
+    constructor() {
+        admin = msg.sender;
+    }
+    
+    // Core functions
+    function deposit() external payable nonReentrant {
+        balances[msg.sender] += msg.value;
+        emit Deposit(msg.sender, msg.value);
+    }
+}
+```
+
+### Security Considerations
+
+1. Reentrancy Protection
+2. Access Control
+3. Integer Overflow Protection
+4. Gas Optimization
+
+## Testing Requirements
+
+All contracts must include:
+
+1. Unit tests
+2. Integration tests
+3. Fuzzing tests
+
+## Deployment Process
+
+1. Local testing
+2. Testnet deployment
+3. Security audit
+4. Mainnet deployment
+
+## Documentation Requirements
+
+- Full technical documentation
+- API documentation
+- Integration guides
+
+## Implementation Timeline
+
+- Week 1-2: Development
+- Week 3: Testing
+- Week 4: Documentation
+- Week 5: Deployment
